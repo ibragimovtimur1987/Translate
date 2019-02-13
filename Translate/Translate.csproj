@@ -50,6 +50,8 @@
     <Compile Include="Entites\DictionaryString.cs" />
     <Compile Include="Entites\InputData.cs" />
     <Compile Include="Entites\InputDataMock.cs" />
+    <Compile Include="Entites\Positions.cs" />
+    <Compile Include="Entites\Tree.cs" />
     <Compile Include="Entites\TreeNode.cs" />
     <Compile Include="Interfaces\IDictionary.cs" />
     <Compile Include="Interfaces\IInputData.cs" />

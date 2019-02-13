@@ -24,30 +24,15 @@ namespace Translate.Service
             List<StringBuilder> outPutResult = new List<StringBuilder>();
             foreach (StringBuilder data in iInputData.data)
             {
-                List<TreeNode<int, string>> result = new List<TreeNode<int, string>>();
-                FillTreeNode(data, 0, result);
-                iReplaceWordsService.Replace(data, result);
+                Tree tree = new Tree(iDictionary);
+                tree.FillTreeNode(data, 0);
+                iReplaceWordsService.Replace(data, tree);
                 outPutResult.Add(data);
             }
             return outPutResult;
         }
 
-        private void FillTreeNode(StringBuilder data, int index, List<TreeNode<int, string>> result)
-        {
-            foreach (TreeNode<int, string> treeNode in iDictionary.treeDictionaryWords.Where(x => x.ParentId == index))
-            {
-                treeNode.SearchString(data);
-                if (treeNode.FindPositions.Count() == 0)
-                {
-                    FillTreeNode(data, treeNode.Id, result);
-                }
-                else
-                {
-
-                    result.Add(treeNode);
-                }
-            }
-        }
+       
         //private bool CheckForAdd(List<TreeNode<int, string>> result, TreeNode<int, string> treeNode)
         //{
         //    foreach (var treenode in result)

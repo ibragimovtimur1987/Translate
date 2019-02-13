@@ -10,9 +10,9 @@ namespace Translate.Service
 {
     class ReplaceWordsService: IReplaceWordsService
     {
-        public void Replace(StringBuilder data, List<TreeNode<int, string>> findTreeNode)
+        public void Replace(StringBuilder data, Tree findTreeNode)
         {
-            var indexes = findTreeNode.Select(x => x).ToList();
+            var indexes = findTreeNode..Select(x =>x.).ToList();
 
 
             foreach (TreeNode<int, string> node in findTreeNode)
