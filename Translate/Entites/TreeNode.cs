@@ -13,7 +13,7 @@ namespace Translate.Entites
         public string Key;
         public D Data;
         public int Lenght;
-        public List<int> FindPositions;
+        public Dictionary<int,int> FindPositions;
         public TreeNode(int id,T parentId, string key, D data)
         {
             ParentId = parentId;
@@ -21,7 +21,7 @@ namespace Translate.Entites
             Data = data;
             Id = id;
             Lenght = Key.Length;
-            FindPositions = new List<int>();
+            FindPositions = new Dictionary<int, int>();
         }
         public void SearchString(StringBuilder str)
         {
@@ -42,7 +42,7 @@ namespace Translate.Entites
 
                 if (j < 0)
                 {
-                    FindPositions.Add(s);
+                    FindPositions.Add(s, s + Lenght);
                     s += (s + m < n) ? m - badChar[str[s + m]] : 1;
                 }
                 else
@@ -51,7 +51,6 @@ namespace Translate.Entites
                 }
             }
         }
-
         private void BadCharHeuristic(string str, int size, ref int[] badChar)
         {
             int i;

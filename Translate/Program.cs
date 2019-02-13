@@ -17,10 +17,14 @@ namespace Translate
             IKernel ninjectKernel = new StandardKernel();
             ninjectKernel.Bind<IInputData>().To<InputDataMock>();
             ninjectKernel.Bind<IDictionaryWords>().To<DictionaryMock>();
+            ninjectKernel.Bind<IReplaceWordsService>().To<ReplaceWordsService>();
             IInputData inputData = ninjectKernel.Get<IInputData>();
             IDictionaryWords dictionaryWords = ninjectKernel.Get<IDictionaryWords>();
-            SearchWords searchWords = new SearchWords(inputData, dictionaryWords);
-            searchWords.Translate();
+           // ISearchWordsService searchWordsService = ninjectKernel.Get<ISearchWordsService>();
+            IReplaceWordsService replaceWordsService = ninjectKernel.Get<IReplaceWordsService>();
+            TranslateWordsService translateWords = new TranslateWordsService(inputData, dictionaryWords, replaceWordsService);
+            List<StringBuilder> result = translateWords.Translate();
+            Console.ReadKey();
         }
     }
 }
