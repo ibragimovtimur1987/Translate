@@ -1,0 +1,10 @@
+D:\проекты\Translate\Translate\bin\Debug\Translate.exe.config
+D:\проекты\Translate\Translate\bin\Debug\Translate.exe
+D:\проекты\Translate\Translate\bin\Debug\Translate.pdb
+D:\проекты\Translate\Translate\bin\Debug\Ninject.dll
+D:\проекты\Translate\Translate\bin\Debug\Ninject.xml
+D:\проекты\Translate\Translate\obj\Debug\Translate.csprojAssemblyReference.cache
+D:\проекты\Translate\Translate\obj\Debug\Translate.csproj.CoreCompileInputs.cache
+D:\проекты\Translate\Translate\obj\Debug\Translate.csproj.CopyComplete
+D:\проекты\Translate\Translate\obj\Debug\Translate.exe
+D:\проекты\Translate\Translate\obj\Debug\Translate.pdb
