@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Translate.Entites;
 
 namespace Translate.Service
 {
@@ -11,77 +12,37 @@ namespace Translate.Service
     {
         private IInputData iInputData;
         private IDictionaryWords iDictionary;
+        private List<TreeNode<int, string>> findListTreeNode;
         public SearchWords(IInputData iInputData, IDictionaryWords iDictionary)
         {
             this.iInputData = iInputData;
             this.iDictionary = iDictionary;
+            findListTreeNode = new List<TreeNode<int, string>>();
         }
         public List<StringBuilder> Translate()
         {
             foreach (StringBuilder data in iInputData.data)
             {
-                Dictionary<string, int[]> replaceDictionary = new Dictionary<string, int[]>();
-                foreach (KeyValuePair<string, string> dictionaryWord in iDictionary.dictionaryWords)
-                {
-                    int[] indexes = SearchString(data, dictionaryWord.Key);
-
-
-                    //for(int i = dictionaryWord.Key.Length; i==0;i--)
-                    //{
-                    //    dictionaryWord.Key.
-                    //}
-                    //int[] indexes = SearchString(data, dictionaryWord.Key);
-                    //if (indexes.Count() > 0)
-                    //{
-                    //    replaceDictionary.Add(dictionaryWord.Key, indexes);
-                    //}
-
-                }
-               
+                List<TreeNode<int, string>> tree = new List<TreeNode<int, string>>();
+                FillTreeNode(data,0);
             }
             return iInputData.data;
         }
-        private int[] SearchString(StringBuilder str, string pat)
+
+        private void FillTreeNode(StringBuilder data,int index)
         {
-            List<int> retVal = new List<int>();
-            int m = pat.Length;
-            int n = str.Length;
-
-            int[] badChar = new int[256];
-
-            BadCharHeuristic(pat, m, ref badChar);
-
-            int s = 0;
-            while (s <= (n - m))
+            foreach (TreeNode<int, string> treeNode in iDictionary.treeDictionaryWords.Where(x => x.ParentId == index))
             {
-                int j = m - 1;
-
-                while (j >= 0 && pat[j] == str[s + j])
-                    --j;
-
-                if (j < 0)
+                treeNode.SearchString(data);
+                if (treeNode.FindPositions.Count() == 0)
                 {
-                    retVal.Add(s);
-                    s += (s + m < n) ? m - badChar[str[s + m]] : 1;
+                    FillTreeNode(data, treeNode.Id);
                 }
                 else
                 {
-                    s += Math.Max(1, j - badChar[str[s + j]]);
+                    findListTreeNode.Add(treeNode);
                 }
             }
-
-            return retVal.ToArray();
-        }
-
-        private void BadCharHeuristic(string str, int size, ref int[] badChar)
-        {
-            int i;
-
-            for (i = 0; i < 256; i++)
-                badChar[i] = -1;
-
-            for (i = 0; i < size; i++)
-                badChar[(int)str[i]] = i;
         }
     }
 }
