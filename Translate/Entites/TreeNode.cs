@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Translate.Entites
 {
-    public class TreeNode<T,D>
+    public class TreeNode
     {
         public int Id;
-        public T ParentId;
+        public int ParentId;
         public string Key;
-        public D Data;
+        public string Data;
         public int Lenght;
-        public List<Position> FindPositions;
-        public TreeNode(int id,T parentId, string key, D data)
+        List<Position> FindPositions;
+        public TreeNode(int id,int parentId, string key, string data)
         {
             ParentId = parentId;
             Key = key;
@@ -23,7 +23,7 @@ namespace Translate.Entites
             Lenght = Key.Length;
             FindPositions = new List<Position>();
         }
-        public void SearchString(StringBuilder str)
+        public List<Position> SearchPositions(StringBuilder str, List<Position> allPositions)
         {
             int m = Key.Length;
             int n = str.Length;
@@ -42,8 +42,8 @@ namespace Translate.Entites
 
                 if (j < 0)
                 {
-                    Position position = new Position(s, s+ Lenght);
-                    FindPositions.Add(position);
+                    Position newPosition = new Position(s, s + Lenght, this);
+                    FindPositions.Add(newPosition);
                     s += (s + m < n) ? m - badChar[str[s + m]] : 1;
                 }
                 else
@@ -51,6 +51,7 @@ namespace Translate.Entites
                     s += Math.Max(1, j - badChar[str[s + j]]);
                 }
             }
+            return FindPositions;
         }
         private void BadCharHeuristic(string str, int size, ref int[] badChar)
         {

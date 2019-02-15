@@ -9,15 +9,15 @@ namespace Translate.Entites
 {
     public class DictionaryMock: IDictionaryWords
     {
-        public List<TreeNode<int, string>> treeDictionaryWords
+        public List<TreeNode> treeDictionaryWords
         {
             get
             {
-                List<TreeNode<int, string>> treeDictionaryWords = new List<TreeNode<int, string>>();
-                TreeNode<int, string> treeNode1 = new TreeNode<int, string>(1,0, "abc", "yyy");
-                TreeNode<int, string> treeNode2 = new TreeNode<int, string>(1,1, "ab", "yk");
-                TreeNode<int, string> treeNode3 = new TreeNode<int, string>(2, 0, "vfr", "yk");
-                TreeNode<int, string> treeNode4 = new TreeNode<int, string>(4, 0, "dea", "ykdea");
+                List<TreeNode> treeDictionaryWords = new List<TreeNode>();
+                TreeNode treeNode1 = new TreeNode(1,0, "abc", "yyy");
+                TreeNode treeNode2 = new TreeNode(1,1, "ab", "yk");
+                TreeNode treeNode3 = new TreeNode(2, 0, "vfr", "yk");
+                TreeNode treeNode4 = new TreeNode(4, 0, "dea", "ykdea");
                 treeDictionaryWords.Add(treeNode1);
                 treeDictionaryWords.Add(treeNode2);
                 treeDictionaryWords.Add(treeNode3);

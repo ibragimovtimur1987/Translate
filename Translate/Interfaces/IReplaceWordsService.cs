@@ -9,6 +9,6 @@ namespace Translate.Interfaces
 {
     interface IReplaceWordsService
     {
-        void Replace(StringBuilder data, Tree findString);
+        void Replace(StringBuilder data, Tree tree);
     }
 }

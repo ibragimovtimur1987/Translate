@@ -9,7 +9,8 @@ namespace Translate.Entites
 {
     public class Tree
     {
-        public List<TreeNode<int, string>> result = new List<TreeNode<int, string>>();
+        public List<Position> AllPositions = new List<Position>();
+        public List<TreeNode> treeNodes = new List<TreeNode>();
         private IDictionaryWords iDictionary;
         internal Tree(IDictionaryWords iDictionary)
         {
@@ -17,17 +18,26 @@ namespace Translate.Entites
         }
         public void FillTreeNode(StringBuilder data, int index)
         {
-            foreach (TreeNode<int, string> treeNode in iDictionary.treeDictionaryWords.Where(x => x.ParentId == index))
+            foreach (TreeNode treeNode in iDictionary.treeDictionaryWords.Where(x => x.ParentId == index))
             {
-                 
-                treeNode.SearchString(data);
-                if (treeNode.FindPositions.Count() == 0)
-                {
-                    FillTreeNode(data, treeNode.Id);
+                List<Position> findPositions = treeNode.SearchPositions(data, AllPositions);
+                //Найдено совпадение в строке по дереву , идем вниз по дереву 
+                if (findPositions.Count>0)
+                {                    
+                    treeNodes.Add(treeNode);
+                    AllPositions.OrderBy(x => x.start);
+                    foreach(Position newPosition in findPositions)
+                    {
+                        if (AllPositions.Any(x => (x.finish < newPosition.start)))
+                        {
+                            AllPositions.Add(newPosition);
+                        }
+                    }
+                                    
                 }
                 else
                 {
-                    result.Add(treeNode);
+                    FillTreeNode(data, treeNode.Id);
                 }
             }
         }

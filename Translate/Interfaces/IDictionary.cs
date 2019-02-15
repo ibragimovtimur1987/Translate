@@ -9,7 +9,7 @@ namespace Translate.Interfaces
 {
     interface IDictionaryWords
     {
-        List<TreeNode<int, string>> treeDictionaryWords
+        List<TreeNode> treeDictionaryWords
         {
             get;
         }
