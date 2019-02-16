@@ -47,8 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entites\DictionaryMock.cs" />
-    <Compile Include="Entites\DictionaryString.cs" />
-    <Compile Include="Entites\InputData.cs" />
     <Compile Include="Entites\InputDataMock.cs" />
     <Compile Include="Entites\Positions.cs" />
     <Compile Include="Entites\Tree.cs" />

@@ -18,6 +18,8 @@ namespace Translate.Entites
                 TreeNode treeNode2 = new TreeNode(1,1, "ab", "yk");
                 TreeNode treeNode3 = new TreeNode(2, 0, "vfr", "yk");
                 TreeNode treeNode4 = new TreeNode(4, 0, "dea", "ykdea");
+                TreeNode treeNode5 = new TreeNode(4, 1, "de", "ykdр");
+                TreeNode treeNode6 = new TreeNode(5, 0, "bcde", "yyyyyy");
                 treeDictionaryWords.Add(treeNode1);
                 treeDictionaryWords.Add(treeNode2);
                 treeDictionaryWords.Add(treeNode3);

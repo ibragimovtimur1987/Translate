@@ -28,7 +28,7 @@ namespace Translate.Entites
                     AllPositions.OrderBy(x => x.start);
                     foreach(Position newPosition in findPositions)
                     {
-                        if (AllPositions.Count == 0 || AllPositions.Any(x => (x.finish < newPosition.start)))
+                        if (AllPositions.Count == 0 || AllPositions.All(x => (x.finish < newPosition.start)))
                         {
                             AllPositions.Add(newPosition);
                         }
