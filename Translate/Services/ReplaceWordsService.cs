@@ -12,9 +12,9 @@ namespace Translate.Service
     {
         public void Replace(StringBuilder data, Tree tree)
         {
-            foreach (TreeNode node in tree.treeNodes)
+            foreach (Position position in tree.AllPositions)
             {
-                data.Replace(node.Key, node.Data);
+                data.Replace(position.treeNode.Key, position.treeNode.Data);
             }
         }
     }

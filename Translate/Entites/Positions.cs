@@ -8,7 +8,7 @@ namespace Translate.Entites
 {
     public class Position
     {
-        TreeNode treeNode;
+        public TreeNode treeNode;
         public int start;
         public int finish;
         public Position(int start, int finish, TreeNode treeNode)

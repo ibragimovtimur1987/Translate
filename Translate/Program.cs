@@ -20,10 +20,11 @@ namespace Translate
             ninjectKernel.Bind<IReplaceWordsService>().To<ReplaceWordsService>();
             IInputData inputData = ninjectKernel.Get<IInputData>();
             IDictionaryWords dictionaryWords = ninjectKernel.Get<IDictionaryWords>();
-           // ISearchWordsService searchWordsService = ninjectKernel.Get<ISearchWordsService>();
+            // ISearchWordsService searchWordsService = ninjectKernel.Get<ISearchWordsService>();
             IReplaceWordsService replaceWordsService = ninjectKernel.Get<IReplaceWordsService>();
             TranslateWordsService translateWords = new TranslateWordsService(inputData, dictionaryWords, replaceWordsService);
             List<StringBuilder> result = translateWords.Translate();
+
             Console.ReadKey();
         }
     }
