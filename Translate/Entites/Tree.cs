@@ -25,7 +25,6 @@ namespace Translate.Entites
                 if (findPositions.Count>0)
                 {                    
                     treeNodes.Add(treeNode);
-                    AllPositions.OrderBy(x => x.start);
                     foreach(Position newPosition in findPositions)
                     {
                         if (AllPositions.Count == 0 || AllPositions.All(x => (x.finish < newPosition.start)))
