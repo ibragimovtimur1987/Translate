@@ -10,12 +10,15 @@ namespace Translate.Service
 {
     class ReplaceWordsService: IReplaceWordsService
     {
-        public void Replace(StringBuilder data, Tree tree)
+        public bool Replace(StringBuilder data, Tree tree)
         {
+            bool IsReplaced = false;
             foreach (Position position in tree.AllPositions)
             {
                 data.Replace(position.treeNode.Key, position.treeNode.Data);
+                IsReplaced = true; ;
             }
+            return IsReplaced;
         }
     }
 }

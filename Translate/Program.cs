@@ -20,11 +20,11 @@ namespace Translate
             ninjectKernel.Bind<IReplaceWordsService>().To<ReplaceWordsService>();
             IInputData inputData = ninjectKernel.Get<IInputData>();
             IDictionaryWords dictionaryWords = ninjectKernel.Get<IDictionaryWords>();
-            // ISearchWordsService searchWordsService = ninjectKernel.Get<ISearchWordsService>();
             IReplaceWordsService replaceWordsService = ninjectKernel.Get<IReplaceWordsService>();
+            Console.WriteLine(String.Format("Начало программы " + DateTime.Now.ToLongTimeString()));
             TranslateWordsService translateWords = new TranslateWordsService(inputData, dictionaryWords, replaceWordsService);
             List<StringBuilder> result = translateWords.Translate();
-
+            Console.WriteLine(String.Format("Окончание программы {0} было заменено строк {1}",DateTime.Now.ToLongTimeString(), result.Count));
             Console.ReadKey();
         }
     }

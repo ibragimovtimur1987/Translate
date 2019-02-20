@@ -9,27 +9,71 @@ namespace Translate.Entites
 {
     public class DictionaryMock: IDictionaryWords
     {
+        public List<TreeNode> _treeDictionaryWords ;
+        
         public List<TreeNode> treeDictionaryWords
         {
             get
             {
-                List<TreeNode> treeDictionaryWords = new List<TreeNode>();
-                TreeNode treeNode1 = new TreeNode(1,0, "ibragim", "petrov");
-                TreeNode treeNode2 = new TreeNode(2,1, "ibr", "pet");
-                TreeNode treeNode3 = new TreeNode(3, 0, "agim", "rov");
-                TreeNode treeNode4 = new TreeNode(4, 3, "agimov", "trov");
-                TreeNode treeNode5 = new TreeNode(5, 0, "movtimur", "trovivan");
-                TreeNode treeNode6 = new TreeNode(6, 0, "timur", "ivan");
-                TreeNode treeNode7 = new TreeNode(7, 6, "tim", "iv");
-                treeDictionaryWords.Add(treeNode1);
-                treeDictionaryWords.Add(treeNode2);
-                treeDictionaryWords.Add(treeNode3);
-                treeDictionaryWords.Add(treeNode4);
-                treeDictionaryWords.Add(treeNode5);
-                treeDictionaryWords.Add(treeNode6);
-                treeDictionaryWords.Add(treeNode7);
-                return treeDictionaryWords;
+                if (_treeDictionaryWords != null) return _treeDictionaryWords;
+                else
+                {
+
+                    _treeDictionaryWords = new List<TreeNode>();
+                    int num_words = 100000;
+                    // Создаем массив букв, которые мы будем использовать.
+                    char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
+                    // Создаем генератор случайных чисел.
+                    Random rand = new Random();
+
+                    // Делаем слова.
+                    for (int i = 1; i <= num_words; i++)
+                    {
+                        Random randKey = new Random();
+                        int num_Key = randKey.Next(1, 8);
+                        Random randValue = new Random();
+                        int num_Value = randValue.Next(1, 20);
+                        // Сделайте слово.
+                        StringBuilder word = new StringBuilder("");
+                        for (int j = 1; j <= num_Key; j++)
+                        {
+                            // Выбор случайного числа от 0 до 25
+                            // для выбора буквы из массива букв.
+                            int letter_num = rand.Next(0, letters.Length - 1);
+
+                            // Добавить письмо.
+                            word.Append(letters[letter_num]);
+                        }
+                        string wordStr = word.ToString();
+                        TreeNode treeNode = new TreeNode(i, GetParentID(wordStr), wordStr, RandomString(num_Value));
+                        // Добавьте слово в список.
+                        _treeDictionaryWords.Add(treeNode);
+                    }
+                    return _treeDictionaryWords;
+                }
             }
+        }
+        private int GetParentID(string word)
+        {
+            TreeNode parent =_treeDictionaryWords.FirstOrDefault(x => x.Key.Contains(word.ToString()));
+            if (parent != null)
+                return parent.Id;
+            else return 0;
+
+        }
+            private string RandomString(int size)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+
+            return builder.ToString();
         }
     }
 }

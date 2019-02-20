@@ -8,12 +8,12 @@ using Translate.Entites;
 
 namespace Translate.Service
 {
-    class TranslateWordsService : ITranslateWordsService
+    class TranslateServiceV1 : ITranslateWordsService
     {
         private IInputData iInputData;
-        private IDictionaryWords iDictionary;
+        private IDictionaryV1 iDictionary;
         private IReplaceWordsService iReplaceWordsService;
-        public TranslateWordsService(IInputData iInputData, IDictionaryWords iDictionary, IReplaceWordsService ReplaceWordsService)
+        public TranslateServiceV1(IInputData iInputData, IDictionaryV1 iDictionary, IReplaceWordsService ReplaceWordsService)
         {
             this.iInputData = iInputData;
             this.iDictionary = iDictionary;
@@ -22,19 +22,12 @@ namespace Translate.Service
         public List<StringBuilder> Translate()
         {
             List<StringBuilder> outPutResult = new List<StringBuilder>();
-            int i = 0;
             foreach (StringBuilder data in iInputData.data)
             {
-                i++;
                 Tree tree = new Tree(iDictionary);
                 tree.FillTreeNode(data, 0);
-                bool isReplaced = iReplaceWordsService.Replace(data, tree);
-                if(isReplaced) outPutResult.Add(data);
-                if (i == 5)  Console.WriteLine("Строка номер {0} {1}",i ,DateTime.Now.ToLongTimeString());
-                if (i == 10) Console.WriteLine("Строка номер {0} {1}",i ,DateTime.Now.ToLongTimeString());
-                if (i ==20 ) Console.WriteLine("Строка номер {0} {1}",i ,DateTime.Now.ToLongTimeString());
-                if (i == 50) Console.WriteLine("Строка номер {0} {1}",i ,DateTime.Now.ToLongTimeString());
-                if (i == 100)Console.WriteLine("Строка номер {0} {1}", i, DateTime.Now.ToLongTimeString());
+                iReplaceWordsService.Replace(data, tree);
+                outPutResult.Add(data);
             }
             return outPutResult;
         }

@@ -7,8 +7,11 @@ using Translate.Entites;
 
 namespace Translate.Interfaces
 {
-    interface IReplaceWordsService
+    interface IDictionaryV1
     {
-        bool Replace(StringBuilder data, Tree tree);
+        List<TreeNode> treeDictionaryWords
+        {
+            get;
+        }
     }
 }
